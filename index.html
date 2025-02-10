@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AIWhisper - The Art of Conversational AI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Landing Page Content -->
+      <div class="landing-content">
+        <header>
+          <div class="container">
+            <h1 class="logo"><span>AI</span>Whisper</h1>
+            <p class="subtitle">The Art of Conversational AI</p>
+            <p>Whisper Your Thoughts, Get Brilliant Responses</p>
+          </div>
+        </header>
+
+        <main>
+          <section class="hero container">
+            <div id="bubble-container"></div>
+            <h2>Welcome to a new era of communication</h2>
+            <p>AIWhisper brings you closer to AI like never before</p>
+            <button class="btn start-chat">Start Whispering</button>
+          </section>
+
+          <section class="features container">
+            <div class="feature-card">
+              <h3>Intuitive Conversation</h3>
+              <p>Engage in natural, flowing dialogues with our AI.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Privacy First</h3>
+              <p>Your whispers are safe with us. We prioritize your privacy.</p>
+            </div>
+            <div class="feature-card">
+              <h3>Customizable Experience</h3>
+              <p>Tailor AIWhisper to match your conversational style.</p>
+            </div>
+          </section>
+        </main>
+
+        <footer>
+          <div class="container">
+            <div class="social-links">
+              <a href="#" aria-label="Twitter">
+                <img src="/api/placeholder/24/24" alt="Twitter icon" />
+              </a>
+              <a href="#" aria-label="LinkedIn">
+                <img src="/api/placeholder/24/24" alt="LinkedIn icon" />
+              </a>
+              <a href="#" aria-label="GitHub">
+                <img src="/api/placeholder/24/24" alt="GitHub icon" />
+              </a>
+            </div>
+            <p>© 2025 AIWhisper. All rights reserved.</p>
+            <nav>
+              <a href="#">Privacy Policy</a> |
+              <a href="#">Terms of Service</a>
+            </nav>
+          </div>
+        </footer>
+      </div>
+
+      <!-- Chat Interface -->
+      <div class="chat-interface hidden">
+        <div class="chat-container">
+          <!-- Sidebar -->
+          <aside class="sidebar">
+            <!-- Dark Mode Toggle -->
+            <button id="dark-mode-toggle">Toggle Dark Mode</button>
+            <!-- Language Selector -->
+            <select id="language-selector">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <!-- Add more languages as needed -->
+            </select>
+            <!-- New Chat Button -->
+            <button class="new-chat-btn">
+              <span>+ New chat</span>
+            </button>
+
+            <!-- Chat History -->
+            <div class="chat-history">
+              <div class="history-item active">
+                <span>New Chat</span>
+              </div>
+              <!-- History items will be added here -->
+            </div>
+
+            <!-- User Menu -->
+            <div class="user-menu">
+              <button class="clear-chat">Clear conversations</button>
+              <div class="user-info">
+                <span class="user-icon">U</span>
+                <span class="user-name">User</span>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main Chat Area -->
+          <main class="chat-main">
+            <!-- Chat Header -->
+            <div class="chat-header">
+              <button class="menu-toggle">☰</button>
+              <h1>AIWhisper</h1>
+            </div>
+
+            <!-- Messages Container -->
+            <div class="messages-container">
+              <!-- Welcome Message -->
+              <div class="welcome-section">
+                <h2>AIWhisper Chat</h2>
+                <div class="examples">
+                  <h3>You can ask me about:</h3>
+                  <div class="example-grid">
+                    <div class="example-card">
+                      <h4>Writing & Analysis</h4>
+                      <p>"Help me write a creative story"</p>
+                    </div>
+                    <div class="example-card">
+                      <h4>Questions & Answers</h4>
+                      <p>"Explain quantum computing"</p>
+                    </div>
+                    <div class="example-card">
+                      <h4>Coding & Technical</h4>
+                      <p>"Debug this Python function"</p>
+                    </div>
+                    <div class="example-card">
+                      <h4>Brainstorming</h4>
+                      <p>"Generate business name ideas"</p>
+                    </div>
+                    <!-- Add more preset prompts here -->
+                  </div>
+                </div>
+              </div>
+
+              <!-- Messages will be added here -->
+              <div class="messages"></div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+              <form class="message-form">
+                <div class="input-container">
+                  <textarea
+                    placeholder="Message AIWhisper..."
+                    rows="1"
+                    class="message-input"
+                  ></textarea>
+                  <button type="submit" class="send-button">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="send-icon"
+                    >
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  </button>
+                </div>
+                <!-- Voice Input Button -->
+                <button id="voice-input" type="button">Voice Input</button>
+                <!-- File Upload -->
+                <input
+                  type="file"
+                  id="file-upload"
+                  style="display: none"
+                  accept=".txt,.pdf,.doc,.docx"
+                />
+                <label for="file-upload" class="file-upload-label">Upload File</label>
+                <div class="input-footer">
+                  <p>AIWhisper can make mistakes. Consider checking important information.</p>
+                </div>
+              </form>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
