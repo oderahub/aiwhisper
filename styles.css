@@ -74,6 +74,7 @@ body {
   margin-bottom: 0.5rem; /* Reduced margin */
   background: linear-gradient(to right, #ffffff, #e0e7ff);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
