@@ -495,6 +495,16 @@ header {
   transform: translateY(-2px);
 }
 
+.chat-interface .dark {
+  position: fixed;
+  top: 60px; /* Adjust as needed */
+  right: 60px; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensures it stays above other elements */
+}
+
 /* Dark Mode */
 [data-theme='dark'] {
   --background: #1a1b1e;
@@ -676,4 +686,11 @@ header {
 /* Smooth Theme Transition */
 * {
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.retry-button {
+  display: none;
+}
+.retry-button:hover {
+  background: var(--hover);
 }

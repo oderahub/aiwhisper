@@ -77,7 +77,9 @@
           <!-- Sidebar -->
           <aside class="sidebar">
             <!-- Dark Mode Toggle -->
-            <button id="dark-mode-toggle">Toggle Dark Mode</button>
+            <div class="dark" id="dark-mode-toggle">
+              <i class="fa-solid fa-circle-half-stroke"></i>
+            </div>
             <!-- Language Selector -->
             <select id="language-selector">
               <option value="en">English</option>
@@ -165,6 +167,9 @@
                     <i class="fa-solid fa-paper-plane"></i>
                   </button>
                 </div>
+                <button id="retryButton" class="retry-button">
+                  <i class="fa-solid fa-rotate-right"></i>
+                </button>
                 <!-- Voice Input Button -->
                 <button id="voice-input" type="button">
                   <i class="fa-solid fa-microphone"></i>

@@ -1,13 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Constants
-    const TYPING_SPEED = 50;
-    const INITIAL_RESPONSE_DELAY = 800;
-    const MESSAGES = [
-        "I appreciate you sharing that. Let me think about it...",
-        "That's an interesting point. Here's my perspective...",
-        "I understand what you're saying. Let me elaborate...",
-        "Thank you for explaining. Here's what I think...",
-    ];
+    const API_KEY = 'AIzaSyCfsKxRrCpi9lkhRLVkPBqH7tIy77QSj9M';
+    const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
     // Elements
     const landingContent = document.querySelector('.landing-content');
@@ -37,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
     chatInterface.style.opacity = '0';
 
     // Event Listeners
-
     menuToggle.addEventListener('click', toggleSidebar);
     darkModeToggle.addEventListener('click', toggleDarkMode);
     languageSelector.addEventListener('change', changeLanguage);
@@ -47,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     clearChatBtn.addEventListener('click', clearChat);
     messageForm.addEventListener('submit', handleMessageSubmit);
     messageInput.addEventListener('input', autoResizeTextarea);
-
 
     startChatBtn.addEventListener('click', () => {
         // Fade out landing page
@@ -81,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         messageInput.style.height = 'auto';
         messageInput.style.height = messageInput.scrollHeight + 'px';
     }
-
 
     // Toggle sidebar for mobile
     function toggleSidebar() {
@@ -171,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         messageInput.focus();
 
         isProcessing = true;
-        await simulateResponse(message);
+        await getGeminiResponse(message);
         isProcessing = false;
     }
 
@@ -210,33 +201,40 @@ document.addEventListener('DOMContentLoaded', () => {
         return messageDiv;
     }
 
-    async function simulateResponse(userMessage) {
+    async function getGeminiResponse(userMessage) {
         const loadingMessage = addMessage('...', 'ai');
 
-        // Simulate thinking time
-        await new Promise(resolve => setTimeout(resolve, INITIAL_RESPONSE_DELAY));
+        try {
+            const requestBody = {
+                contents: [{
+                    parts: [{
+                        text: userMessage
+                    }]
+                }]
+            };
 
-        // Get random response
-        const response = MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+            const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            });
 
-        // Remove loading message
-        loadingMessage.remove();
-
-        // Add actual response with typing effect
-        const messageDiv = addMessage('', 'ai');
-        const messageText = messageDiv.querySelector('.message-text');
-
-        // Typing effect
-        let i = 0;
-        const typeWriter = () => {
-            if (i < response.length) {
-                messageText.textContent += response.charAt(i);
-                i++;
-                setTimeout(typeWriter, TYPING_SPEED);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
-        };
 
-        typeWriter();
+            const data = await response.json();
+            const aiResponse = data.candidates[0].content.parts[0].text;
+
+            loadingMessage.remove();
+            addMessage(aiResponse, 'ai');
+        } catch (error) {
+            loadingMessage.remove();
+            addMessage('Sorry, I encountered an error. Please try again.', 'ai');
+            console.error('Error:', error);
+        }
     }
 
     function saveChatToLocalStorage() {
@@ -285,72 +283,4 @@ document.addEventListener('DOMContentLoaded', () => {
             messageInput.focus();
         }
     })();
-});
-
-function createBubbles() {
-    const bubbleContainer = document.getElementById('bubble-container');
-    const bubbleCount = 15;
-
-    for (let i = 0; i < bubbleCount; i++) {
-        const bubble = document.createElement('div');
-        bubble.className = 'bubble';
-
-        // Random size between 20px and 100px
-        const size = Math.random() * 80 + 20;
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
-
-        // Random starting position
-        bubble.style.left = `${Math.random() * 100}%`;
-
-        // Random animation duration between 15-30 seconds
-        const duration = Math.random() * 15 + 15;
-        bubble.style.animationDuration = `${duration}s`;
-
-        // Random animation delay
-        bubble.style.animationDelay = `${Math.random() * 20}s`;
-
-        bubbleContainer.appendChild(bubble);
-    }
-}
-
-// Call when DOM is loaded
-document.addEventListener('DOMContentLoaded', createBubbles);
-
-document.addEventListener('DOMContentLoaded', () => {
-    // Prevent scrolling on landing page
-    document.body.style.overflow = 'hidden';
-
-    // Handle transition to chat interface
-    const startChatBtn = document.querySelector('.start-chat');
-    const landingContent = document.querySelector('.landing-content');
-    const chatInterface = document.querySelector('.chat-interface');
-
-    startChatBtn.addEventListener('click', () => {
-        // Fade out landing page
-        landingContent.style.opacity = '0';
-        landingContent.style.transition = 'opacity 0.5s ease-out';
-
-        // After fade out, hide landing and show chat
-        setTimeout(() => {
-            landingContent.style.display = 'none';
-            chatInterface.style.display = 'flex';
-
-            // Fade in chat interface
-            setTimeout(() => {
-                chatInterface.style.opacity = '1';
-            }, 50);
-
-            // Focus on input
-            const messageInput = document.querySelector('.message-input');
-            messageInput.focus();
-        }, 500);
-    });
-
-    // Add necessary CSS to elements
-    landingContent.style.minHeight = '100vh';
-    landingContent.style.transition = 'opacity 0.5s ease-out';
-
-    chatInterface.style.opacity = '0';
-    chatInterface.style.transition = 'opacity 0.5s ease-out';
 });
