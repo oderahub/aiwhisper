@@ -38,7 +38,6 @@ body {
   transition: opacity 0.5s ease-out;
 }
 
-/* Landing Page Specific Styles */
 /* Landing Page Container */
 .landing-content {
   position: fixed;
@@ -459,6 +458,7 @@ header {
   resize: none;
   font-size: 1rem;
   background: transparent;
+  color: grey;
 }
 
 .send-button {

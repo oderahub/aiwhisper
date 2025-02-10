@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Constants
-    const TYPING_SPEED = 50; // ms per character
+    const TYPING_SPEED = 50;
     const INITIAL_RESPONSE_DELAY = 800;
     const MESSAGES = [
         "I appreciate you sharing that. Let me think about it...",
