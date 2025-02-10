@@ -119,6 +119,6 @@ The application is fully responsive and works seamlessly across:
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
-## Project Link: [https://github.com/yourusername/aiwhisper]
+## Project Link: [https://github.com/oderahub/aiwhisper]
 
 **Made with ❤️ by CHIDERA**
